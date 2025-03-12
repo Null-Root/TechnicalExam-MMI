@@ -45,8 +45,15 @@ class UserInterface(ValidatedInput):
             sort_by = self.get_selected_item("Sort by", ["due_date", "priority_level", "status"], "status")
             print(f"Sorting by: {sort_by}")
             tasks = self.task_manager.get_all_task(sort_by)
+            print("\n")
             for task in tasks:
-                print(f"Task -> {task.title}, ID: -> {task.task_id}, ")
+                print(f"Task -> {task.title}, \n ({task.task_id})")
+                print(f"Description    : {task.description}")
+                print(f"Due Date      : {task.due_date}")
+                print(f"Priority      : {task.priority_level}")
+                print(f"Status        : {task.status}")
+                print("\n")
+
 
         elif choice == "c":
             task_id = self.get_string("Task ID", "")
