@@ -14,6 +14,12 @@ This is where user interacts with the application
 class UserInterface(ValidatedInput):
     def __init__(self):
         self.task_manager = TaskManager()
+    
+    def _display_tasks(self):
+        tasks = self.task_manager.get_all_task("status")
+        for task in tasks:
+            print(f"Task -> {task.title}, \n ID -> ({task.task_id})")
+        print("\n")
 
     def start(self):
         print("Task Management")
@@ -56,6 +62,8 @@ class UserInterface(ValidatedInput):
 
 
         elif choice == "c":
+            self._display_tasks()
+
             task_id = self.get_string("Task ID", "")
 
             # Fetch Task
@@ -75,6 +83,8 @@ class UserInterface(ValidatedInput):
                 print("Invalid ID")
 
         elif choice == "d":
+            self._display_tasks()
+
             task_id = self.get_string("Task ID", "")
 
             # Fetch Task
@@ -92,6 +102,8 @@ class UserInterface(ValidatedInput):
                 print("Invalid ID")
 
         elif choice == "e":
+            self._display_tasks()
+
             task_id = self.get_string("Task ID", "")
 
             # Fetch Task
