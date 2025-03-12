@@ -13,16 +13,8 @@ class TaskManager:
     def __init__(self):
         self.taskRepository = TaskRepository()
 
-    def add_new_task(
-        self,
-        title,
-        description,
-        due_date,
-        priority_level,
-        status
-    ):
-        newTask = Task("", title, description, due_date, priority_level, status, datetime.today())
-        self.taskRepository.insert_task(newTask)
+    def add_new_task(self, new_task: Task):
+        self.taskRepository.insert_task(new_task)
 
     def get_all_task(self, sort_by):
         return self.taskRepository.get_all_task(sort_by)
@@ -30,9 +22,8 @@ class TaskManager:
     def get_task(self, id):
         return self.taskRepository.get_task(id)
 
-    def update_existing_task(self, task_id, title, description, due_date, priority_level, status, creation_ts):
-        existingTask = Task(task_id, title, description, due_date, priority_level, status, creation_ts)
-        return self.taskRepository.update_task(existingTask)
+    def update_existing_task(self, updated_task: Task):
+        return self.taskRepository.update_task(updated_task)
 
     def delete_existing_task(self, id):
         self.taskRepository.delete_task(id)

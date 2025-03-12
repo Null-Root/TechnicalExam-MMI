@@ -1,3 +1,5 @@
+from datetime import datetime
+from task import Task
 from task_manager import TaskManager
 from util_input import ValidatedInput
 from declared_enums import PRIORITY, STATUS
@@ -34,8 +36,10 @@ class UserInterface(ValidatedInput):
             due_date = self.get_date("Due Date")
             priority_level = self.get_selected_item("Priority Level", PRIORITY, PRIORITY[0])
             status = self.get_selected_item("Status", STATUS, STATUS[0])
+            
+            newTask = Task("", title, description, due_date, priority_level, status, datetime.today())
 
-            self.task_manager.add_new_task(title, description, due_date, priority_level, status)
+            self.task_manager.add_new_task(newTask)
 
         elif choice == "b":
             sort_by = self.get_selected_item("Sort by", ["due_date", "priority_level", "status"], "status")
@@ -52,13 +56,13 @@ class UserInterface(ValidatedInput):
             if task:
                 print(f"Task -> {task.title}, ID: -> {task.task_id}")
 
-                title = self.get_string("Title", task.title)
-                description = self.get_string("Description", task.description)
-                due_date = self.get_date("Due Date", task.due_date)
-                priority_level = self.get_selected_item("Priority Level", PRIORITY, task.priority_level)
-                status = self.get_selected_item("Status", STATUS, task.status)
+                task.title = self.get_string("Title", task.title)
+                task.description = self.get_string("Description", task.description)
+                task.due_date = self.get_date("Due Date", task.due_date)
+                task.priority_level = self.get_selected_item("Priority Level", PRIORITY, task.priority_level)
+                task.status = self.get_selected_item("Status", STATUS, task.status)
 
-                self.task_manager.update_existing_task(task_id, title, description, due_date, priority_level, status, task.creation_ts)
+                self.task_manager.update_existing_task(task)
 
             else:
                 print("Invalid ID")

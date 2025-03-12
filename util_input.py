@@ -16,11 +16,11 @@ class ValidatedInput:
     @staticmethod
     def get_date(prompt: str, default: str = None) -> str:
         if default is None:
-            default = datetime.now().strftime("%Y-%m-%d")  # Default to today's date
+            default = datetime.now().strftime("%Y-%m-%d")           # Default to today's date
         while True:
             date_str = input(f"{prompt} (Press enter to keep default: {default}): ").strip()
             if not date_str:
-                return default  # Use default if no input
+                return default                                      # Use default if no input
             try:
                 date_obj = datetime.strptime(date_str, "%Y-%m-%d")  # Validate format
                 return date_obj.strftime("%Y-%m-%d")
@@ -29,7 +29,10 @@ class ValidatedInput:
 
     @staticmethod
     def get_selected_item(prompt: str, options: list, default) -> str:
-        option_map = {str(i + 1): option for i, option in enumerate(options)}
+        option_map = {}                             # Initialize an empty dictionary
+        for index, option in enumerate(options):    # Loop through the list with index
+            key = str(index + 1)                    # Convert index to a string and start from 1
+            option_map[key] = option                # Map the number as a key to the option
 
         for num, item in option_map.items():
             print(f"{num}. {item}")
