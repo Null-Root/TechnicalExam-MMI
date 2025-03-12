@@ -6,6 +6,9 @@ ValidatedInput
 
 This is used for input validation.
 This is inherited by UserInterface.
+Each accepts a prompt, default value
+
+The get_selected_options accepts an additional argument "options"
 """
 class ValidatedInput:
     @staticmethod
