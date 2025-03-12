@@ -29,10 +29,10 @@ class ValidatedInput:
 
     @staticmethod
     def get_selected_item(prompt: str, options: list, default) -> str:
-        option_map = {}                             # Initialize an empty dictionary
-        for index, option in enumerate(options):    # Loop through the list with index
-            key = str(index + 1)                    # Convert index to a string and start from 1
-            option_map[key] = option                # Map the number as a key to the option
+        option_map = {}                             
+        for index, option in enumerate(options):    
+            key = str(index + 1)                    
+            option_map[key] = option
 
         for num, item in option_map.items():
             print(f"{num}. {item}")
